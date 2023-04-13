@@ -1,0 +1,141 @@
+html {
+  font-size: 62.5%;
+}
+
+.Calculate-Container {
+  background-image: url("../Calculate/calculate.png"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  
+}
+.calculate-title h1 {
+  font-family: "Rubik-semibold", sans-serif;
+  font-size: 3rem;
+  padding: 6rem 2rem;
+  color: #000;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+}
+label {
+  display: block;
+  font-size: 1.4rem;
+  color: black;
+  /* font-weight: bold; */
+  font-weight: 500;
+  font-family: "Rubik", sans-serif;
+}
+
+.inputfield{
+  width: 23rem;
+  height: 3rem;
+  border-radius: .8rem;
+}
+
+.text {
+  padding: .5rem;
+}
+
+.inputbox{
+  width: 23rem;
+  height: 3rem;
+  border-radius: .8rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  height: 15rem;
+  justify-content: space-between;
+}
+.input-container-row-1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3rem 5rem 8rem 5rem;
+  color: #000;
+}
+.input-container-row-2 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3rem 5rem 6rem 5rem;
+  color: #000;
+}
+
+.submit-fields{
+  margin: auto;
+}
+
+.output-fields{
+  margin: auto;
+}
+
+.output-fields textarea{
+  outline: none;
+  height: 10rem;
+  width: 35rem;
+  padding: 1.2rem 2rem;
+  margin: 3rem 0;
+  box-sizing: border-box;
+  border: .2rem solid #ccc;
+  border-radius: .4rem;
+  background-color: #f8f8f8;
+  font-size: 1.6rem;
+  resize: none;
+}
+.result-text{
+  font-family: "Rubik-semibold", sans-serif;
+  font-size: 1.6rem;
+  color: #000;
+  font-weight: 500;
+}
+
+@media (max-width: 998px) {
+  html {
+    font-size: 55%;
+  }
+}
+@media (max-width: 864px){
+  .inputfield{
+    width: 15rem;
+  }
+  .inputbox{
+    width: 15rem;
+  }
+  .btn-global{
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 44%;
+  }
+  .Calculate-Container{
+    height: 90rem;
+  }
+  .input-container-row-1{
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem 0 1rem 0;
+  }
+
+  .input-container-row-2{
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem 0 1rem 0;
+  }
+  .inputfield{
+    margin: .8rem 0 1rem 0;
+  }
+
+  .inputbox{
+    margin: .8rem 0 1rem 0;
+  }
+
+}
