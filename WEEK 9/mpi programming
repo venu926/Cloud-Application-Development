@@ -1,0 +1,40 @@
+from mpi4py import MPI
+import cv2
+
+# Initialize MPI environment
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+size = comm.Get_size()
+
+# Define the image processing function
+def process_image(input_image, output_image):
+    # Load the input image using OpenCV
+    image = cv2.imread(input_image)
+        
+    # Perform some image processing operations on the input image
+    processed_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        
+    # Save the processed image to the output file
+    cv2.imwrite(output_image, processed_image)
+
+# Distribute the input files across MPI nodes
+if rank == 0:
+    input_files = ["input_image_{}.jpg".format(i) for i in range(10)]
+else:
+    input_files = None
+    
+input_files = comm.scatter(input_files, root=0)
+
+# Process the input files
+output_files = []
+for input_file in input_files:
+    output_file = "output_image_{}_{}.jpg".format(rank, input_file.split("_")[-1])
+    process_image(input_file, output_file)
+    output_files.append(output_file)
+
+# Gather the output files from all the MPI nodes
+output_files = comm.gather(output_files, root=0)
+
+# Consolidate the output files into a single list
+if rank == 0:
+    output_files = [file for sublist in output_files for file in sublist]
