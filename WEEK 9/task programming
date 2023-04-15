@@ -1,0 +1,45 @@
+#include "tbb/tbb.h"
+#include "opencv2/opencv.hpp"
+#include <string>
+#include <vector>
+
+using namespace tbb;
+
+// Define the image processing task
+class ImageProcessingTask {
+private:
+    std::string input_image;
+    std::string output_image;
+public:
+    ImageProcessingTask(std::string input, std::string output) : input_image(input), output_image(output) {}
+    void operator() () const {
+        // Load the input image using OpenCV
+        cv::Mat image = cv::imread(input_image);
+        
+        // Perform some image processing operations on the input image
+        cv::cvtColor(image, image, cv::COLOR_BGR2GRAY);
+        
+        // Save the processed image to the output file
+        cv::imwrite(output_image, image);
+    }
+};
+
+// Define the main function to create and run image processing tasks
+int main(int argc, char* argv[]) {
+    // Define the input and output file paths
+    std::vector<std::string> input_files = {"input_image_1.jpg", "input_image_2.jpg", "input_image_3.jpg"};
+    std::vector<std::string> output_files = {"output_image_1.jpg", "output_image_2.jpg", "output_image_3.jpg"};
+    
+    // Create a task group to manage the image processing tasks
+    task_group tg;
+    
+    // Create and enqueue image processing tasks for each input file
+    for (int i = 0; i < input_files.size(); i++) {
+        tg.run(ImageProcessingTask(input_files[i], output_files[i]));
+    }
+    
+    // Wait for all tasks to complete
+    tg.wait();
+    
+    return 0;
+}
